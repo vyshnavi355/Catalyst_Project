@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Product Dashboard</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f4f4;
+        }
+
+        .top-sales {
+            width: 80%;
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #fff;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        .top-sales-details {
+            list-style-type: none;
+            padding: 0;
+            margin: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+        }
+
+        li {
+            width: 48%;
+            margin-bottom: 20px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        a {
+            text-decoration: none;
+            color: #333;
+            display: block;
+        }
+
+        img {
+            max-width: 100%;
+            height: auto;
+            border-top-left-radius: 5px;
+            border-top-right-radius: 5px;
+        }
+
+        .product {
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-bottom: 1px solid #ddd;
+            font-weight: bold;
+        }
+
+        .price {
+            padding: 10px;
+            display: block;
+            color: #ff4500;
+            font-size: 1.2rem;
+        }
+
+        .search-bar {
+            margin-bottom: 20px;
+            padding: 10px;
+        }
+
+        @media (max-width: 768px) {
+            li {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="top-sales box">
+        <div class="title">Products</div>
+        
+        <div class="search-bar">
+            <input type="text" id="searchInput" placeholder="Search products">
+        </div>
+        <div class="search-bar">
+            <input type="text" id="AddNewproduct" placeholder="Add New product">
+            <input type="submit">
+        </div>
+        
+        <ul class="top-sales-details" id="productList">
+            <li>
+                <a href="#">
+                    <img src="images/sunglasses.jpg" alt="" />
+                    <span class="product">Vuitton Sunglasses</span>
+                </a>
+                <span class="price">1107</span>
+            </li>
+            <li>
+                <a href="#">
+                  <img src="images/jeans.jpg" alt="" />
+                  <span class="product">Hourglass Jeans </span>
+                </a>
+                <span class="price">1567</span>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="images/nike-min.jpg" alt="" />
+                  <span class="product">Nike Sport Shoe</span>
+                </a>
+                <span class="price">1234</span>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="images/scarves.jpg" alt="" />
+                  <span class="product">Hermes Silk Scarves.</span>
+                </a>
+                <span class="price">2312</span>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="images/blueBag.jpg" alt="" />
+                  <span class="product">Succi Ladies Bag</span>
+                </a>
+                <span class="price">1456</span>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="images/bag.jpg" alt="" />
+                  <span class="product">Gucci Womens's Bags</span>
+                </a>
+                <span class="price">2345</span>
+              </li>
+        
+              <li>
+                <a href="#">
+                  <img src="images/addidas.jpg" alt="" />
+                  <span class="product">Addidas Running Shoe</span>
+                </a>
+                <span class="price">2345</span>
+              </li>
+              <li>
+                <a href="#">
+                  <img src="images/shirt.jpg" alt="" />
+                  <span class="product">Bilack Wear's Shirt</span>
+                </a>
+                <span class="price">1245</span>
+              </li>
+            </ul>
+          </div>
+        </div>
+        </div>
+        </section>
+        </ul>
+    </div>
+
+    <script>
+        // Example JavaScript functionality for filtering products based on search input
+        const searchInput = document.getElementById('searchInput');
+        const productList = document.getElementById('productList');
+        const AddNewproduct = document.getElementById('AddNewproduct');
+
+        searchInput.addEventListener('input', function () {
+            const searchTerm = searchInput.value.toLowerCase();
+
+            Array.from(productList.children).forEach(li => {
+                const productName = li.querySelector('.product').textContent.toLowerCase();
+                li.style.display = productName.includes(searchTerm) ? 'block' : 'none';
+            });
+        });
+    </script>
+</body>
+</html>
+

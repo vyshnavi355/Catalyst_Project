@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<!-- Website - www.codingnepalweb.com -->
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8" />
+    
+    <title>Ecommerce Portal</title>
+    <script>
+      function submitform(){
+          // WARNING: For POST requests, body is set to null by browsers.
+          
+          
+          let name = document.getElementById("name").value
+          let brand=document.getElementById("brand").value
+          let url=document.getElementById("url").value
+          let rate=document.getElementById("rate").value
+          let initial_stock=document.getElementById("initial_stock").value
+          let variant_type=document.getElementById("variant_type").value
+
+           // Required Fields Validation
+          if (!name || !brand || !url || !rate || !initial_stock) {
+              alert("Please fill in all required fields.");
+              return false;
+          }
+
+          // Numeric Validation for Rate and Initial Stock
+          if (isNaN(rate) || isNaN(initial_stock)) {
+              alert("Rate and Initial Stock must be numeric values.");
+              return false;
+          }
+          // URL validation pattern
+          let urlPattern = /[a-zA-Z]/;
+          if (!urlPattern.test(url)) {
+              alert("Invalid URL. Please enter a valid URL.");
+              return false; // Stop the form submission
+          }
+
+
+          let data = JSON.stringify({
+           "request":{
+           "name": name,
+           "tags": [],
+           "brand": brand,
+           "url": url,
+           "variants": [
+              {
+                 "rate": rate,
+                 "initial_stock": initial_stock,
+                 "custom_fields": [],
+                 "package_details": {}
+               }
+              ],
+              "variant_type": variant_type,
+              "show_in_storefront": true,
+              "is_returnable": true
+}
+});
+
+let xhr = new XMLHttpRequest(); /*It collects values from the form, constructs a JSON payload, 
+and sends it to the server using XMLHttpRequest.*/
+xhr.withCredentials = true;
+/*which listens for changes in the readyState property of the XMLHttpRequest. When the readyState becomes 4
+(which means the request is complete),the event listener function is executed.*/
+xhr.addEventListener("readystatechange", function () {
+            if (this.readyState === 4) {  
+                if (this.status === 201) {
+                    console.log(this.responseText);
+                    // Show success message
+                     alert("successfuly added product");
+                } else {
+                    // Show error message if the request was not successful
+                    alert("Product already exits, Please try again.");
+                }
+            }
+        });
+
+xhr.open("POST", "/server/e_commerce_portal_function/");/* Intialize the request,and the method is post and the URL for the server is provided. */
+xhr.setRequestHeader("Content-Type", "application/json"); /*method is used to set the "Content-Type" header to "application/json".*/
+
+xhr.send(data);/*This sends the request to the server with the JSON payload */
+      }
+  </script>
+
+    <link rel="stylesheet" href="style.css" />
+    <!-- Boxicons CDN Link -->
+    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>
+        /* Sidebar Form Styling */
+        .sidebar-form {
+            display: flex;
+            flex-direction: column;
+            padding: 10px;
+        }
+
+        .sidebar-form input[type="text"] {
+            padding: 5px;
+            margin-bottom: 10px; /* Space between the text input and the submit button */
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .sidebar-form input[type="submit"] {
+            padding: 5px;
+            background-color: #4CAF50; /* Green background for submit button */
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .sidebar-form input[type="submit"]:hover {
+            background-color: #45a049; /* Darker shade for hover effect */
+        }
+        .page-wrapper{
+          display: flex;
+  justify-content: space-between;
+  height: 350px;
+  background: #fff;
+  display: flex;
+  align-items: center;
+  position: fixed;
+  width: calc(100% - 240px);
+  left: 240px;
+  z-index: 100;
+  padding: 0 50px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  transition: all 0.5s ease;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="sidebar">
+      <div class="logo-details">
+        <i class='bx bxl-internet-explorer'></i>
+        <span class="logo_name">eCommerce<br>Portal</span>
+      </div>
+      <ul class="nav-links">
+        <li>
+          <a href="#" class="active">
+            <i class="bx bx-grid-alt"></i>
+            <span class="links_name">Dashboard</span>
+          </a>
+        </li>
+        <li>
+          <a href="product.html">
+            <i class="bx bx-box"></i>
+            <span class="links_name">Product</span>
+          </a>
+        </li>
+        <li>
+          <a href="order.html">
+            <i class="bx bx-list-ul"></i>
+            <span class="links_name">Order list</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-pie-chart-alt-2"></i>
+            <span class="links_name">Analytics</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-coin-stack"></i>
+            <span class="links_name">Stock</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-message"></i>
+            <span class="links_name">Messages</span>
+          </a>
+        </li>
+        <li>
+          <a href="new.html">
+            <i class="bx bxl-internet-explorer"></i>
+            <span class="links_name">Zoho eCommerce</span>
+          </a>
+        </li>
+        <li>
+          <a href="#">
+            <i class="bx bx-cog"></i>
+            <span class="links_name">Setting</span>
+          </a>
+        </li>
+
+        <li class="log_out">
+          <a href="#">
+            <i class="bx bx-log-out"></i>
+            <span class="links_name">Log out</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+    <div class="page-wrapper">
+      <main class="main-container">
+        <form id="test">
+          <label>Name</label>
+            <input type="text" id="name" required><br><br>
+            <label>Brand</label>
+            <input type="text" id="brand"><br><br>
+            <label>Url</label>
+            <input type="text" id="url" required><br><br>
+            <label>Rate</label>
+            <input type="number" id="rate" required ><br><br>
+            <label>Initial_stock</label>
+            <input type="number" id="initial_stock" required><br><br>
+            <label>Variant_type</label>
+            <input type="text" id="variant_type"><br><br>
+
+            <input type="submit" onclick="submitform();return false;"> 
+        </form>
+      </main>
+      <!-- End Main -->
+      </div>
+  </body>
+</html>
